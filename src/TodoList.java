@@ -13,6 +13,10 @@ public class TodoList {
            String[] words = textTodo.split("\\s+");
            String kom = words[0].intern();
 
+           if (kom != komAdd && kom != komList && kom != komDelete && kom != komEdit) {
+               return;
+           }
+
            if (kom == komList) {
                printList(todoList);
                return;
@@ -26,7 +30,7 @@ public class TodoList {
                if (kom == komAdd) {
                    addList(textTodo);
                } else {
-                   System.out.println("Нет команды List или Add");
+                   System.out.println("Нет команды Add");
                }
            } else {
                int komIndex = Integer.parseInt(words[1]) - 1;
