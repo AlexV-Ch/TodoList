@@ -45,6 +45,7 @@ public class TodoList {
                        addList(newText(words, 2));
                        System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
                    }
+
                } else if (kom == komEdit) {
                    if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim()
@@ -53,6 +54,7 @@ public class TodoList {
                    } else {
                        System.out.println("Дело с таким номером не существует");
                    }
+
                } else if (kom == komDelete) {
                    if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim() + "\" удалено");
@@ -60,6 +62,7 @@ public class TodoList {
                    } else {
                        System.out.println("Дело с таким номером не существует");
                    }
+
                } else {
                    System.out.println("Что то не так с параметром или командой (ADD;EDIT;DELETE)");
                }
