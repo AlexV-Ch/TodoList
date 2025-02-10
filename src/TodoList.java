@@ -14,6 +14,7 @@ public class TodoList {
            String kom = words[0].intern();
 
            if (kom != komAdd && kom != komList && kom != komDelete && kom != komEdit) {
+               System.out.println("Нет такой команды");
                return;
            }
 
@@ -23,30 +24,40 @@ public class TodoList {
            }
 
            if (words.length <= 1) {
+               System.out.println("Вы не ввели текст");
                return;
            }
 
            if (!words[1].matches(regex)) {
                if (kom == komAdd) {
-                   addList(textTodo);
+                   addList(newText(words, 1));
+                   System.out.println("Добавлено дело \"" + newText(words, 1) + "\"");
                } else {
-                   System.out.println("Нет команды Add");
+                   System.out.println("Нет команды ADD");
                }
            } else {
-               int komIndex = Integer.parseInt(words[1]) - 1;
+               int komIndex = Integer.parseInt(words[1]);
                if (kom == komAdd) {
-                   if (komIndex <= todoList.size()) {
-                   addList(komIndex, textTodo);
+                   if (komIndex < todoList.size()) {
+                   addList(komIndex, newText(words, 2));
+                       System.out.println("Добавлено дело \"" + newText(words, 2) + "\"");
                } else {
-                       addList(textTodo);
+                       addList(newText(words, 2));
+                       System.out.println("Добавлено дело \"" + newText(words, 2) + "\"");
                    }
                } else if (kom == komEdit) {
-                   if (komIndex <= todoList.size()) {
-                       setList(komIndex, textTodo);
+                   if (komIndex < todoList.size()) {
+                       System.out.println("Дело \"" + todoList.get(komIndex) + "\" заменено на \"" + newText(words, 2) + "\"");
+                       setList(komIndex, newText(words, 2));
+                   } else {
+                       System.out.println("Дело с таким номером не существует");
                    }
                } else if (kom == komDelete) {
-                   if (komIndex <= todoList.size()) {
+                   if (komIndex < todoList.size()) {
+                       System.out.println("Дело \"" + todoList.get(komIndex) + "\" удалено");
                        deleteList(komIndex);
+                   } else {
+                       System.out.println("Дело с таким номером не существует");
                    }
                } else {
                    System.out.println("Что то не так с параметром или командой (ADD;EDIT;DELETE)");
@@ -69,12 +80,25 @@ public class TodoList {
                 todoList.remove(index);
            }
 
+           private String newText(String[] words, int index) {
+               String newText = "";
+               for (int i = index; i < words.length; i++) {
+                       newText += words[i] + " ";
+                   }
+               return newText;
+           }
+
 
        private void printList(ArrayList<String> todoList) {
-            int caseNumber = 1;
-            for (int i = 0; i < todoList.size(); i++) {
-                System.out.println(caseNumber++ + " - " + todoList.get(i));
+            //int caseNumber = 1;
+            if (todoList.size() != 0) {
+                for (int i = 0; i < todoList.size(); i++) {
+                    System.out.println(i + " - " + todoList.get(i));
+                }
+            } else {
+                System.out.println("Список дел пуст");
             }
+
        }
 
 
