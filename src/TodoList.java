@@ -31,30 +31,31 @@ public class TodoList {
            if (!words[1].matches(regex)) {
                if (kom == komAdd) {
                    addList(newText(words, 1));
-                   System.out.println("Добавлено дело \"" + newText(words, 1) + "\"");
+                   System.out.println("Добавлено дело \"" + newText(words, 1).trim() + "\"");
                } else {
-                   System.out.println("Нет команды ADD");
+                   System.out.println("Нет индекса у команды");
                }
            } else {
                int komIndex = Integer.parseInt(words[1]);
                if (kom == komAdd) {
                    if (komIndex < todoList.size()) {
-                   addList(komIndex, newText(words, 2));
-                       System.out.println("Добавлено дело \"" + newText(words, 2) + "\"");
+                       addList(komIndex, newText(words, 2));
+                       System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
                } else {
                        addList(newText(words, 2));
-                       System.out.println("Добавлено дело \"" + newText(words, 2) + "\"");
+                       System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
                    }
                } else if (kom == komEdit) {
                    if (komIndex < todoList.size()) {
-                       System.out.println("Дело \"" + todoList.get(komIndex) + "\" заменено на \"" + newText(words, 2) + "\"");
+                       System.out.println("Дело \"" + todoList.get(komIndex).trim()
+                               + "\" заменено на \"" + newText(words, 2).trim() + "\"");
                        setList(komIndex, newText(words, 2));
                    } else {
                        System.out.println("Дело с таким номером не существует");
                    }
                } else if (kom == komDelete) {
                    if (komIndex < todoList.size()) {
-                       System.out.println("Дело \"" + todoList.get(komIndex) + "\" удалено");
+                       System.out.println("Дело \"" + todoList.get(komIndex).trim() + "\" удалено");
                        deleteList(komIndex);
                    } else {
                        System.out.println("Дело с таким номером не существует");
