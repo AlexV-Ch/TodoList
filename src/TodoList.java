@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
 public class TodoList {
-       private ArrayList<String> todoList = new ArrayList<>();
-       private String komList = "LIST".intern();
-       private String komAdd = "ADD".intern();
-       private String komEdit = "EDIT".intern();
-       private String komDelete = "DELETE".intern();
-       private String regex = "[0-9]+";
+       private final ArrayList<String> todoList = new ArrayList<>();
+       private final String komList = "LIST";
+       private final String komAdd = "ADD";
+       private final String komEdit = "EDIT";
+       private final String komDelete = "DELETE";
+       private final String regex = "[0-9]+";
 
 
        public void text(String textTodo) {
            String[] words = textTodo.split("\\s+");
            String kom = words[0].intern();
 
-           if (kom != komAdd && kom != komList && kom != komDelete && kom != komEdit) {
+           if (!kom.equals(komAdd) && !kom.equals(komList) && !kom.equals(komDelete) && !kom.equals(komEdit)) {
                System.out.println("Нет такой команды");
                return;
            }
 
-           if (kom == komList) {
+           if (kom.equals(komList)) {
                printList(todoList);
                return;
            }
@@ -29,7 +29,7 @@ public class TodoList {
            }
 
            if (!words[1].matches(regex)) {
-               if (kom == komAdd) {
+               if (kom.equals(komAdd)) {
                    addList(newText(words, 1));
                    System.out.println("Добавлено дело \"" + newText(words, 1).trim() + "\"");
                } else {
@@ -37,7 +37,7 @@ public class TodoList {
                }
            } else {
                int komIndex = Integer.parseInt(words[1]);
-               if (kom == komAdd) {
+               if (kom.equals(komAdd)) {
                    if (komIndex < todoList.size()) {
                        addList(komIndex, newText(words, 2));
                        System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
@@ -46,7 +46,7 @@ public class TodoList {
                        System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
                    }
 
-               } else if (kom == komEdit) {
+               } else if (kom.equals(komEdit)) {
                    if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim()
                                + "\" заменено на \"" + newText(words, 2).trim() + "\"");
@@ -55,7 +55,7 @@ public class TodoList {
                        System.out.println("Дело с таким номером не существует");
                    }
 
-               } else if (kom == komDelete) {
+               } else if (kom.equals(komDelete)) {
                    if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim() + "\" удалено");
                        deleteList(komIndex);
