@@ -37,35 +37,68 @@ public class TodoList {
                }
            } else {
                int komIndex = Integer.parseInt(words[1]);
-               if (kom.equals(komAdd)) {
-                   if (komIndex < todoList.size()) {
+               switch (kom) {
+                   case komAdd -> {
+                       if (komIndex < todoList.size()) {
                        addList(komIndex, newText(words, 2));
                        System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
-               } else {
+                        } else {
                        addList(newText(words, 2));
                        System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
-                   }
-
-               } else if (kom.equals(komEdit)) {
-                   if (komIndex < todoList.size()) {
+                        }
+                    }
+                   case komEdit -> {
+                       if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim()
                                + "\" заменено на \"" + newText(words, 2).trim() + "\"");
                        setList(komIndex, newText(words, 2));
-                   } else {
+                        } else {
                        System.out.println("Дело с таким номером не существует");
+                        }
                    }
-
-               } else if (kom.equals(komDelete)) {
-                   if (komIndex < todoList.size()) {
+                   case komDelete -> {
+                       if (komIndex < todoList.size()) {
                        System.out.println("Дело \"" + todoList.get(komIndex).trim() + "\" удалено");
                        deleteList(komIndex);
-                   } else {
+                        } else {
                        System.out.println("Дело с таким номером не существует");
+                        }
                    }
-
-               } else {
-                   System.out.println("Что то не так с параметром или командой (ADD;EDIT;DELETE)");
+                   default -> System.out.println("Что то не так с параметром или командой (ADD;EDIT;DELETE)");
                }
+
+
+//               if (kom.equals(komAdd)) {
+//                   if (komIndex < todoList.size()) {
+//                       addList(komIndex, newText(words, 2));
+//                       System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
+//               } else {
+//                       addList(newText(words, 2));
+//                       System.out.println("Добавлено дело \"" + newText(words, 2).trim() + "\"");
+//                   }
+//
+//               } else if (kom.equals(komEdit)) {
+//                   if (komIndex < todoList.size()) {
+//                       System.out.println("Дело \"" + todoList.get(komIndex).trim()
+//                               + "\" заменено на \"" + newText(words, 2).trim() + "\"");
+//                       setList(komIndex, newText(words, 2));
+//                   } else {
+//                       System.out.println("Дело с таким номером не существует");
+//                   }
+//
+//               } else if (kom.equals(komDelete)) {
+//                   if (komIndex < todoList.size()) {
+//                       System.out.println("Дело \"" + todoList.get(komIndex).trim() + "\" удалено");
+//                       deleteList(komIndex);
+//                   } else {
+//                       System.out.println("Дело с таким номером не существует");
+//                   }
+//
+//               } else {
+//                   System.out.println("Что то не так с параметром или командой (ADD;EDIT;DELETE)");
+//               }
+
+
            }
        }
 
@@ -94,8 +127,7 @@ public class TodoList {
 
 
        private void printList(ArrayList<String> todoList) {
-            //int caseNumber = 1;
-            if (todoList.size() != 0) {
+             if (todoList.size() != 0) {
                 for (int i = 0; i < todoList.size(); i++) {
                     System.out.println(i + " - " + todoList.get(i));
                 }
