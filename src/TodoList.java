@@ -127,7 +127,7 @@ public class TodoList {
 
 
        private void printList(ArrayList<String> todoList) {
-             if (todoList.size() != 0) {
+             if (!todoList.isEmpty()) {
                 for (int i = 0; i < todoList.size(); i++) {
                     System.out.println(i + " - " + todoList.get(i));
                 }
